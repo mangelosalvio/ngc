@@ -9,10 +9,10 @@ const schema = yup.object({
   type_of_business: yup.string().required("Type of Business is Required"),
   business_name: yup.string().required("Business Name Required"),
   business_address: yup.string().required("Business Address Required"),
-  telephone_number : yup.string().required("Enter Telephone Number")
+
 });
 
-export default function BusinessForm() {
+export default function BusinessRenewalForm() {
   const {
     values,
     errors,
@@ -25,13 +25,13 @@ export default function BusinessForm() {
       type_of_business: "Single",
       business_name: "",
       business_address: "",
-      telephone_number : ''
+    
     },
     validationSchema: schema,
     onSubmit: (values, { setValues,resetForm }) => {
       console.log(values)
       axios
-        .put("/", values)
+        .put("/renewal", values)
         .then((response) => {
           if (response.data) {
             resetForm();
@@ -182,135 +182,7 @@ export default function BusinessForm() {
         </Form.Group>
       </Form.Row>
 
-      <Form.Row>
-        <Form.Group as={Col}>
-          <Form.Label>Telephone</Form.Label>
-          <Form.Control type="text"
-            name='telephone_number'
-            onChange={handleChange}
-            value={values.telephone_number}
-            isValid={!errors.telephone_number && touched.telephone_number}
-            isInvalid={!!errors.telephone_number}
-           placeholder="Enter Phone" />
-           <Form.Control.Feedback type="invalid">
-            {errors.telephone_number}
-          </Form.Control.Feedback>
-          <Form.Text className="text-muted">
-            Enter business phone number in the following fornat: e.g. 4441234
-          </Form.Text>
-        </Form.Group>
-
-        <Form.Group as={Col}>
-          <Form.Label>Mobile Number</Form.Label>
-          <Form.Control type="text" placeholder="09XXXXXXXXX" />
-          <Form.Text className="text-muted">
-            Enter mobile number in the following format: 09097770000
-          </Form.Text>
-        </Form.Group>
-      </Form.Row>
-
-      <Form.Group>
-        <Form.Label>DTI/SEC/CDA Registration No.#:</Form.Label>
-        <Form.Control type="text" placeholder="Enter Registration No." />
-        <Form.Text className="text-muted">
-          Enter your DTI/SEC/CDA Reg. No.
-        </Form.Text>
-      </Form.Group>
-
-      <Form.Group>
-        <Form.Label>Date of Registration</Form.Label>
-        <Form.Control type="date" placeholder="Enter Date" />
-        <Form.Text className="text-muted">
-          Enter the date of registration
-        </Form.Text>
-      </Form.Group>
-
-      <hr></hr>
-      <div className="form-header">TAXPAYERS INFORMATION</div>
-
-      <Form.Group>
-        <Form.Label>Lastname</Form.Label>
-        <Form.Control type="text" placeholder="Enter Lastname" />
-        <Form.Text className="text-muted">Enter your Lastname</Form.Text>
-      </Form.Group>
-
-      <Form.Group>
-        <Form.Label>Firstname</Form.Label>
-        <Form.Control type="text" placeholder="Enter Firstname" />
-        <Form.Text className="text-muted">Enter your Firstname</Form.Text>
-      </Form.Group>
-
-      <Form.Group>
-        <Form.Label>Middlename</Form.Label>
-        <Form.Control type="text" placeholder="Enter Middlename" />
-        <Form.Text className="text-muted">Enter your Middlename</Form.Text>
-      </Form.Group>
-
-      <Form.Group>
-        <Form.Label>Taxpayers Address</Form.Label>
-        <Form.Control type="text" placeholder="Enter Address" />
-        <Form.Text className="text-muted">Enter your address</Form.Text>
-      </Form.Group>
-
-      <Form.Row>
-        <Form.Group as={Col}>
-          <Form.Label>Telephone</Form.Label>
-          <Form.Control type="text" placeholder="Enter Phone" />
-          <Form.Text className="text-muted">
-            Enter phone number in the following fornat: e.g. 4441234
-          </Form.Text>
-        </Form.Group>
-
-        <Form.Group as={Col}>
-          <Form.Label>Mobile Number</Form.Label>
-          <Form.Control type="text" placeholder="09XXXXXXXXX" />
-          <Form.Text className="text-muted">
-            Enter mobile number in the following format: 09097770000
-          </Form.Text>
-        </Form.Group>
-      </Form.Row>
-
-      <Form.Group>
-        <Form.Label>Email Address</Form.Label>
-        <Form.Control type="text" placeholder="Enter Email" />
-        <Form.Text className="text-muted">Enter your email address</Form.Text>
-      </Form.Group>
-
-      <Form.Group>
-        <Form.Label>Contact Person In Case of Emergency</Form.Label>
-        <Form.Control type="text" placeholder="Enter name of contact person" />
-        <Form.Text className="text-muted">Enter name</Form.Text>
-      </Form.Group>
-
-      <Form.Group>
-        <Form.Label>Contact Number of Contact Person</Form.Label>
-        <Form.Control
-          type="text"
-          placeholder="Enter contact number of contact person"
-        />
-        <Form.Text className="text-muted">
-          Enter your name in the following format ; e.g. Dela, Cruz Juan
-        </Form.Text>
-      </Form.Group>
-
-      <div className="form-header">BUSINESS PROPERTY</div>
-
-      <Form.Group>
-        <Form.Label>Type of Business</Form.Label>
-        <Form.Control as="select">
-          <option>Owned</option>
-          <option>Rented</option>
-        </Form.Control>
-
-        <Form.Text className="text-muted">
-          If Owned: Please present a photocopy of any "Legal Proof of Ownership"
-          upon submission of documents to the Business Permits and Licensing
-          Office.<br></br>
-          If Rented: Please Present a photocopy of Contract of Lease upon
-          submission of documents to the Business Permits and Licensing Office.
-        </Form.Text>
-      </Form.Group>
-
+      
       <Button variant="primary" type="submit" block>
         Submit
       </Button>

@@ -7,6 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import BusinessForm from "./BusinessForm";
 import Home from "./Home";
 import { Col, Container, Nav, Navbar, Row } from "react-bootstrap";
+import BusinessRenewalForm from "./BusinessRenewalForm";
 
 setAxiosHeader();
 
@@ -24,8 +25,8 @@ function App() {
           <Nav.Link href="#features">
             <Link to="/business">New Business</Link>
           </Nav.Link>
-          <Nav.Link href="#features">
-            <Link to="/business">Renewal</Link>
+          <Nav.Link href="#renewal">
+            <Link to="/renewal">Renewal</Link>
           </Nav.Link>
         </Nav>
       </Navbar>
@@ -38,6 +39,9 @@ function App() {
               </Route>
               <Route path="/business" exact>
                 <BusinessForm />
+              </Route>
+              <Route path="/renewal" exact>
+                <BusinessRenewalForm />
               </Route>
             </Switch>
           </Col>
