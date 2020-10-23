@@ -1,68 +1,111 @@
 import React, { useState } from "react";
 import { Button, Col, Form } from "react-bootstrap";
 import axios from "axios";
+import { Formik, useFormik, useFormikContext } from "formik";
+import * as yup from "yup";
+import { useEffect } from "react";
+
+const schema = yup.object({
+  type_of_business: yup.string().required("Type of Business is Required"),
+  business_name: yup.string().required("Business Name Required"),
+  business_address: yup.string().required("Business Address Required"),
+});
 
 export default function BusinessForm() {
-  const [name, setName] = useState("");
-  const [address, setAddress] = useState("");
-
-  const onSubmit = (e) => {
-    e.preventDefault();
-    axios
-      .put("/persons", {
-        name,
-        address,
-      })
-      .then((response) => {
-        console.log("Person added");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  const {
+    values,
+    errors,
+    touched,
+    handleChange,
+    handleSubmit,
+    setValues,
+  } = useFormik({
+    initialValues: {
+      type_of_business: "Single",
+      business_name: "",
+      business_address: "",
+    },
+    validationSchema: schema,
+    onSubmit: (values, { setValues }) => {
+      axios
+        .put("/", values)
+        .then((response) => {
+          if (response.data) {
+            setValues((prevState) => ({
+              ...prevState,
+              ...response.data,
+            }));
+          }
+        })
+        .catch((err) => console.log(err));
+    },
+  });
 
   return (
-    <Form>
+    <Form noValidate onSubmit={handleSubmit}>
+      <div className="background"></div>
 
-      <div className='background'> .
-        
-      </div>
-
-      <Form.Group>
+      <Form.Group controlId="type_of_business_form">
         <Form.Label>Type of Business</Form.Label>
-        <Form.Control as="select">
+        <Form.Control
+          as="select"
+          name="type_of_business"
+          isValid={!errors.type_of_business && touched.type_of_business}
+          value={values.type_of_business}
+          onChange={handleChange}
+          isInvalid={!!errors.type_of_business}
+        >
           <option>Single</option>
           <option>Partnership</option>
           <option>Corporation</option>
           <option>Cooperative</option>
         </Form.Control>
-
+        <Form.Control.Feedback type="invalid">
+          {errors.type_of_business}
+        </Form.Control.Feedback>
         <Form.Text className="text-muted">
           Enter your type of business
         </Form.Text>
       </Form.Group>
 
-      <Form.Group>
+      <Form.Group controlId="business_name_form">
         <Form.Label>Name of Business</Form.Label>
         <Form.Control
           type="text"
+          name="business_name"
           placeholder="Enter Name"
+          value={values.business_name}
+          onChange={handleChange}
+          isValid={!errors.business_name && touched.business_name}
+          isInvalid={!!errors.business_name}
         />
+        <Form.Control.Feedback type="invalid">
+          {errors.business_name}
+        </Form.Control.Feedback>
         <Form.Text className="text-muted">
           Enter the name of your business
         </Form.Text>
       </Form.Group>
 
       <Form.Row>
-        <Form.Group as={Col}>
+        <Form.Group as={Col} controlId="business_address_form">
           <Form.Label>Business Address</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter Address"
-            />
-            <Form.Text className="text-muted">
-              Enter your business address in the following format: House#, Street, Subdivision or Purok, City
-            </Form.Text>
+          <Form.Control
+            type="text"
+            placeholder="Enter Address"
+            name="business_address"
+            isValid={!errors.business_address && touched.business_address}
+            value={values.business_address}
+            onChange={handleChange}
+            isInvalid={!!errors.business_address}
+          />
+          <Form.Control.Feedback type="invalid">
+            {errors.business_address}
+          </Form.Control.Feedback>
+          <Form.Text className="text-muted">
+            Enter your business address in the following format: House#, Street,
+            Subdivision or Purok, City
+          </Form.Text>
         </Form.Group>
 
         <Form.Group>
@@ -131,20 +174,14 @@ export default function BusinessForm() {
             <option>Vista Alegre</option>
           </Form.Control>
 
-          <Form.Text className="text-muted">
-            Choose your barangay
-          </Form.Text>
+          <Form.Text className="text-muted">Choose your barangay</Form.Text>
         </Form.Group>
-
       </Form.Row>
 
       <Form.Row>
         <Form.Group as={Col}>
           <Form.Label>Telephone</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Enter Phone"
-          />
+          <Form.Control type="text" placeholder="Enter Phone" />
           <Form.Text className="text-muted">
             Enter business phone number in the following fornat: e.g. 4441234
           </Form.Text>
@@ -152,22 +189,16 @@ export default function BusinessForm() {
 
         <Form.Group as={Col}>
           <Form.Label>Mobile Number</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="09XXXXXXXXX"
-          />
+          <Form.Control type="text" placeholder="09XXXXXXXXX" />
           <Form.Text className="text-muted">
-            Enter  mobile number in the following format: 09097770000
+            Enter mobile number in the following format: 09097770000
           </Form.Text>
         </Form.Group>
       </Form.Row>
 
       <Form.Group>
         <Form.Label>DTI/SEC/CDA Registration No.#:</Form.Label>
-        <Form.Control
-          type="text"
-          placeholder="Enter Registration No."
-        />
+        <Form.Control type="text" placeholder="Enter Registration No." />
         <Form.Text className="text-muted">
           Enter your DTI/SEC/CDA Reg. No.
         </Form.Text>
@@ -175,73 +206,43 @@ export default function BusinessForm() {
 
       <Form.Group>
         <Form.Label>Date of Registration</Form.Label>
-        <Form.Control
-          type="date"
-          placeholder="Enter Date"
-        />
+        <Form.Control type="date" placeholder="Enter Date" />
         <Form.Text className="text-muted">
           Enter the date of registration
         </Form.Text>
       </Form.Group>
 
-
       <hr></hr>
-      <div className='form-header'>
-        TAXPAYERS INFORMATION
-      </div>
-
+      <div className="form-header">TAXPAYERS INFORMATION</div>
 
       <Form.Group>
         <Form.Label>Lastname</Form.Label>
-        <Form.Control
-          type="text"
-          placeholder="Enter Lastname"
-        />
-        <Form.Text className="text-muted">
-          Enter your Lastname
-        </Form.Text>
+        <Form.Control type="text" placeholder="Enter Lastname" />
+        <Form.Text className="text-muted">Enter your Lastname</Form.Text>
       </Form.Group>
 
       <Form.Group>
         <Form.Label>Firstname</Form.Label>
-        <Form.Control
-          type="text"
-          placeholder="Enter Firstname"
-        />
-        <Form.Text className="text-muted">
-          Enter your Firstname
-        </Form.Text>
+        <Form.Control type="text" placeholder="Enter Firstname" />
+        <Form.Text className="text-muted">Enter your Firstname</Form.Text>
       </Form.Group>
 
       <Form.Group>
         <Form.Label>Middlename</Form.Label>
-        <Form.Control
-          type="text"
-          placeholder="Enter Middlename"
-        />
-        <Form.Text className="text-muted">
-          Enter your Middlename
-        </Form.Text>
+        <Form.Control type="text" placeholder="Enter Middlename" />
+        <Form.Text className="text-muted">Enter your Middlename</Form.Text>
       </Form.Group>
 
       <Form.Group>
         <Form.Label>Taxpayers Address</Form.Label>
-        <Form.Control
-          type="text"
-          placeholder="Enter Address"
-        />
-        <Form.Text className="text-muted">
-          Enter your address
-        </Form.Text>
+        <Form.Control type="text" placeholder="Enter Address" />
+        <Form.Text className="text-muted">Enter your address</Form.Text>
       </Form.Group>
 
       <Form.Row>
         <Form.Group as={Col}>
           <Form.Label>Telephone</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Enter Phone"
-          />
+          <Form.Control type="text" placeholder="Enter Phone" />
           <Form.Text className="text-muted">
             Enter phone number in the following fornat: e.g. 4441234
           </Form.Text>
@@ -249,36 +250,23 @@ export default function BusinessForm() {
 
         <Form.Group as={Col}>
           <Form.Label>Mobile Number</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="09XXXXXXXXX"
-          />
+          <Form.Control type="text" placeholder="09XXXXXXXXX" />
           <Form.Text className="text-muted">
-          Enter mobile number in the following format: 09097770000
+            Enter mobile number in the following format: 09097770000
           </Form.Text>
         </Form.Group>
       </Form.Row>
 
       <Form.Group>
         <Form.Label>Email Address</Form.Label>
-        <Form.Control
-          type="text"
-          placeholder="Enter Email"
-        />
-        <Form.Text className="text-muted">
-          Enter your email address
-        </Form.Text>
+        <Form.Control type="text" placeholder="Enter Email" />
+        <Form.Text className="text-muted">Enter your email address</Form.Text>
       </Form.Group>
 
       <Form.Group>
         <Form.Label>Contact Person In Case of Emergency</Form.Label>
-        <Form.Control
-          type="text"
-          placeholder="Enter name of contact person"
-        />
-        <Form.Text className="text-muted">
-          Enter name
-        </Form.Text>
+        <Form.Control type="text" placeholder="Enter name of contact person" />
+        <Form.Text className="text-muted">Enter name</Form.Text>
       </Form.Group>
 
       <Form.Group>
@@ -292,12 +280,8 @@ export default function BusinessForm() {
         </Form.Text>
       </Form.Group>
 
+      <div className="form-header">BUSINESS PROPERTY</div>
 
-      <div className='form-header'>
-        BUSINESS PROPERTY
-      </div>
-
-      
       <Form.Group>
         <Form.Label>Type of Business</Form.Label>
         <Form.Control as="select">
@@ -306,17 +290,17 @@ export default function BusinessForm() {
         </Form.Control>
 
         <Form.Text className="text-muted">
-        If Owned: Please present a photocopy of any "Legal Proof of Ownership" upon submission of documents to the Business Permits and Licensing Office.<br></br>
-        If Rented: Please Present a photocopy of Contract of Lease upon submission of documents to the Business Permits and Licensing Office.
-
+          If Owned: Please present a photocopy of any "Legal Proof of Ownership"
+          upon submission of documents to the Business Permits and Licensing
+          Office.<br></br>
+          If Rented: Please Present a photocopy of Contract of Lease upon
+          submission of documents to the Business Permits and Licensing Office.
         </Form.Text>
       </Form.Group>
 
-      <Button variant="primary" type="submit" onClick={(e) => onSubmit(e)} block>
+      <Button variant="primary" type="submit" block>
         Submit
       </Button>
-
     </Form>
-      
   );
 }
