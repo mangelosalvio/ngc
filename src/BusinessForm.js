@@ -9,7 +9,7 @@ const schema = yup.object({
   type_of_business: yup.string().required("Type of Business is Required"),
   business_name: yup.string().required("Business Name Required"),
   business_address: yup.string().required("Business Address Required"),
-  telephone_number : yup.string().required("Enter Telephone Number")
+  telephone_number: yup.string().required("Telephone Number Required")
 });
 
 export default function BusinessForm() {
@@ -22,10 +22,11 @@ export default function BusinessForm() {
     setValues,
   } = useFormik({
     initialValues: {
-      type_of_business: "Single",
+      type_of_business: "",
       business_name: "",
       business_address: "",
-      telephone_number : ''
+      telephone_number: "",
+      mobile_number: ""
     },
     validationSchema: schema,
     onSubmit: (values, { setValues,resetForm }) => {
@@ -78,9 +79,9 @@ export default function BusinessForm() {
           type="text"
           name="business_name"
           placeholder="Enter Name"
-          value={values.business_name}
-          onChange={handleChange}
           isValid={!errors.business_name && touched.business_name}
+          value={values.business_name}
+          onChange={handleChange} 
           isInvalid={!!errors.business_name}
         />
         <Form.Control.Feedback type="invalid">
@@ -191,8 +192,8 @@ export default function BusinessForm() {
             value={values.telephone_number}
             isValid={!errors.telephone_number && touched.telephone_number}
             isInvalid={!!errors.telephone_number}
-           placeholder="Enter Phone" />
-           <Form.Control.Feedback type="invalid">
+            placeholder="Enter Phone" />
+          <Form.Control.Feedback type="invalid">
             {errors.telephone_number}
           </Form.Control.Feedback>
           <Form.Text className="text-muted">
@@ -202,7 +203,18 @@ export default function BusinessForm() {
 
         <Form.Group as={Col}>
           <Form.Label>Mobile Number</Form.Label>
-          <Form.Control type="text" placeholder="09XXXXXXXXX" />
+          <Form.Control type="text" 
+            name="mobile_number"
+            isValid={!errors.mobile_number && touched.mobile_number}
+            value={values.mobile_number}
+            onChange={handleChange}
+            isInvalid={!!errors.mobile_number}
+            placeholder="09XXXXXXXXX"
+          />
+          <Form.Control.Feedback type="invalid">
+            {errors.mobile_number}
+          </Form.Control.Feedback>
+
           <Form.Text className="text-muted">
             Enter mobile number in the following format: 09097770000
           </Form.Text>

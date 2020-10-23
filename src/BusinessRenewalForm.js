@@ -22,9 +22,10 @@ export default function BusinessRenewalForm() {
     setValues,
   } = useFormik({
     initialValues: {
-      type_of_business: "Single",
+      type_of_business: "",
       business_name: "",
       business_address: "",
+      telehone_number: "",
     
     },
     validationSchema: schema,
