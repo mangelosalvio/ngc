@@ -6,9 +6,12 @@ import * as yup from "yup";
 import { useEffect } from "react";
 
 const schema = yup.object({
-  type_of_business: yup.string().required("Type of Business is Required"),
+  permit_number: yup.string().required("Permit number is Required"),
+  ban: yup.string().required("Permit number is Required"),
   business_name: yup.string().required("Business Name Required"),
   business_address: yup.string().required("Business Address Required"),
+  barangay: yup.string().required("Barangay is Required"),
+  contact_number: yup.string().required("Contact Number is Required"),
 
 });
 
@@ -48,22 +51,39 @@ export default function BusinessRenewalForm() {
 
   return (
     <Form noValidate onSubmit={handleSubmit}>
-      <div className="background"></div>
+      <div className="form-header">Application Form For Renewal of Business</div>
 
-      <Form.Group controlId="type_of_business_form">
-        <Form.Label>Type of Business</Form.Label>
+      <Form.Group controlId="permit_number">
+        <Form.Label>Permit Number</Form.Label>
         <Form.Control
-          as="select"
-          name="type_of_business"
-          isValid={!errors.type_of_business && touched.type_of_business}
-          value={values.type_of_business}
+          type="text"
+          name="permit_number"
+          placeholder="Enter Permit Number"
+          isValid={!errors.permit_number && touched.permit_number}
+          value={values.permit_number}
           onChange={handleChange}
-          isInvalid={!!errors.type_of_business}
+          isInvalid={!!errors.permit_number}
         >
-          <option>Single</option>
-          <option>Partnership</option>
-          <option>Corporation</option>
-          <option>Cooperative</option>
+        </Form.Control>
+        <Form.Control.Feedback type="invalid">
+          {errors.type_of_business}
+        </Form.Control.Feedback>
+        <Form.Text className="text-muted">
+          Enter your type of business
+        </Form.Text>
+      </Form.Group>
+
+      <Form.Group controlId="ban">
+        <Form.Label>B.A.N. (Business Account Number)</Form.Label>
+        <Form.Control
+          type="text"
+          name="ban"
+          placeholder="Enter Permit Number"
+          isValid={!errors.ban && touched.ban}
+          value={values.ban}
+          onChange={handleChange}
+          isInvalid={!!errors.ban}
+        >
         </Form.Control>
         <Form.Control.Feedback type="invalid">
           {errors.type_of_business}
@@ -115,7 +135,14 @@ export default function BusinessRenewalForm() {
 
         <Form.Group>
           <Form.Label>Barangay</Form.Label>
-          <Form.Control as="select">
+          <Form.Control 
+            as="select"
+            name="business_address"
+            isValid={!errors.business_address && touched.business_address}
+            value={values.business_address}
+            onChange={handleChange}
+            isInvalid={!!errors.business_address}
+          >
             <option>Barangay 1</option>
             <option>Barangay 2</option>
             <option>Barangay 3</option>
@@ -178,6 +205,9 @@ export default function BusinessRenewalForm() {
             <option>Villamonte</option>
             <option>Vista Alegre</option>
           </Form.Control>
+          <Form.Control.Feedback type="invalid">
+          {errors.barangay}
+          </Form.Control.Feedback>
 
           <Form.Text className="text-muted">Choose your barangay</Form.Text>
         </Form.Group>

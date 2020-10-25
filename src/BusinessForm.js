@@ -63,7 +63,7 @@ export default function BusinessForm() {
 
   return (
     <Form noValidate onSubmit={handleSubmit}>
-      <div className="background"></div>
+      <div className='form-header'>APPLICATION FORM FOR NEW BUSINESS</div>
 
       <Form.Group controlId="type_of_business_form">
         <Form.Label>Type of Business</Form.Label>
@@ -279,7 +279,7 @@ export default function BusinessForm() {
       </Form.Group>
 
       <hr></hr>
-      <div className="form-header">TAXPAYERS INFORMATION</div>
+      <div className="title">Taxpayers Information</div>
 
       <Form.Group>
         <Form.Label>Lastname</Form.Label>
@@ -424,7 +424,7 @@ export default function BusinessForm() {
         </Form.Text>
       </Form.Group>
 
-      <div className="form-header">BUSINESS PROPERTY</div>
+      <div className="title">Business Property</div>
 
       <Form.Group>
         <Form.Label>Type of Lease</Form.Label>
