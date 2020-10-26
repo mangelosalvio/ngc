@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.css";
+import { Link } from "react-router-dom";
 
-
-
-export default function Home() {
+export default function Home({ history }) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -20,22 +19,17 @@ export default function Home() {
         className="d-flex align-items-center justify-content-center"
         style={{ height: "100vh" }}
       >
-        <Button variant="primary" onClick={handleShow}>
-          Submit
-        </Button>
-      </div>
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Successfuly submitted application.</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Please verify your application by clicking the link sent to your email address.
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="primary" onClick={handleClose}>
-            Close
+        <Link to="/business">
+          <Button variant="primary" size="lg">
+            New Business
           </Button>
-        </Modal.Footer>
-      </Modal>
+        </Link>
+        <Link to="/renewal">
+          <Button variant="secondary" size="lg" style={{ marginLeft: "1rem" }}>
+            Business Renewal
+          </Button>
+        </Link>
+      </div>
     </>
   );
 }

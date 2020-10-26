@@ -7,19 +7,13 @@ import { useEffect } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.css";
 
-
-
 const schema = yup.object({
-  permit_number: yup.string().required("Permit number is Required"),
-  ban: yup.string().required("Permit number is Required"),
+  permit_number: yup.string().required("Permit Number is Required"),
+  ban: yup.string().required("Business Account Number is Required"),
   business_name: yup.string().required("Business Name Required"),
   business_address: yup.string().required("Business Address Required"),
   barangay: yup.string().required("Barangay is Required"),
-  contact_number: yup.string().required("Contact Number is Required"),
-
 });
-
-
 
 export default function BusinessRenewalForm() {
   const {
@@ -31,21 +25,22 @@ export default function BusinessRenewalForm() {
     setValues,
   } = useFormik({
     initialValues: {
-      type_of_business: "",
+      permit_number: "",
+      ban: "",
       business_name: "",
       business_address: "",
-      telehone_number: "",
+      barangay: "",
     },
 
-
     validationSchema: schema,
-    onSubmit: (values, { setValues,resetForm }) => {
-      console.log(values)
+    onSubmit: (values, { setValues, resetForm }) => {
+      console.log(values);
       axios
         .put("/renewal", values)
         .then((response) => {
           if (response.data) {
             resetForm();
+            setShow(true);
             // setValues((prevState) => ({
             //   ...prevState,
             //   ...response.data,
@@ -58,14 +53,12 @@ export default function BusinessRenewalForm() {
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-  const onLoginFormSubmit = (e) => {
-    e.preventDefault();
-    handleClose();};
 
   return (
     <Form noValidate onSubmit={handleSubmit}>
-      <div className="form-header">Application Form For Renewal of Business</div>
+      <div className="form-header">
+        Application Form For Renewal of Business
+      </div>
 
       <Form.Group controlId="permit_number">
         <Form.Label>Permit Number</Form.Label>
@@ -77,10 +70,9 @@ export default function BusinessRenewalForm() {
           value={values.permit_number}
           onChange={handleChange}
           isInvalid={!!errors.permit_number}
-        >
-        </Form.Control>
+        ></Form.Control>
         <Form.Control.Feedback type="invalid">
-          {errors.type_of_business}
+          {errors.permit_number}
         </Form.Control.Feedback>
         <Form.Text className="text-muted">
           Enter your type of business
@@ -96,11 +88,10 @@ export default function BusinessRenewalForm() {
           isValid={!errors.ban && touched.ban}
           value={values.ban}
           onChange={handleChange}
-          isInvalid={!!errors.ban }
-        >
-        </Form.Control>
+          isInvalid={!!errors.ban}
+        ></Form.Control>
         <Form.Control.Feedback type="invalid">
-          {errors.type_of_business}
+          {errors.ban}
         </Form.Control.Feedback>
         <Form.Text className="text-muted">
           Enter your type of business
@@ -149,14 +140,15 @@ export default function BusinessRenewalForm() {
 
         <Form.Group>
           <Form.Label>Barangay</Form.Label>
-          <Form.Control 
+          <Form.Control
             as="select"
-            name="business_address"
-            isValid={!errors.business_address && touched.business_address}
-            value={values.business_address}
+            name="barangay"
+            isValid={!errors.barangay && touched.barangay}
+            value={values.barangay}
             onChange={handleChange}
-            isInvalid={!!errors.business_address}
+            isInvalid={!!errors.barangay}
           >
+            <option value="">Select Barangay</option>
             <option>Barangay 1</option>
             <option>Barangay 2</option>
             <option>Barangay 3</option>
@@ -220,16 +212,14 @@ export default function BusinessRenewalForm() {
             <option>Vista Alegre</option>
           </Form.Control>
           <Form.Control.Feedback type="invalid">
-          {errors.barangay}
+            {errors.barangay}
           </Form.Control.Feedback>
 
           <Form.Text className="text-muted">Choose your barangay</Form.Text>
         </Form.Group>
       </Form.Row>
 
-      
-      
-      <Button variant="primary" type="submit" onClick={handleShow} block>
+      <Button variant="primary" type="submit" block>
         Submit
       </Button>
 
@@ -237,7 +227,9 @@ export default function BusinessRenewalForm() {
         <Modal.Header closeButton>
           <Modal.Title>Successfuly submitted application.</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Please verify your application by clicking the link sent to your email address.
+        <Modal.Body>
+          Please verify your application by clicking the link sent to your email
+          address.
         </Modal.Body>
         <Modal.Footer>
           <Button variant="primary" onClick={handleClose} block>
@@ -245,9 +237,6 @@ export default function BusinessRenewalForm() {
           </Button>
         </Modal.Footer>
       </Modal>
-
     </Form>
-
-    
   );
 }
