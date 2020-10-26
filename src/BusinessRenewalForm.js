@@ -20,6 +20,7 @@ const schema = yup.object({
 });
 
 
+
 export default function BusinessRenewalForm() {
   const {
     values,
@@ -34,8 +35,9 @@ export default function BusinessRenewalForm() {
       business_name: "",
       business_address: "",
       telehone_number: "",
-    
     },
+
+
     validationSchema: schema,
     onSubmit: (values, { setValues,resetForm }) => {
       console.log(values)
@@ -53,6 +55,13 @@ export default function BusinessRenewalForm() {
         .catch((err) => console.log(err));
     },
   });
+
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const onLoginFormSubmit = (e) => {
+    e.preventDefault();
+    handleClose();};
 
   return (
     <Form noValidate onSubmit={handleSubmit}>
@@ -219,13 +228,23 @@ export default function BusinessRenewalForm() {
       </Form.Row>
 
       
-      <Button variant="primary" type="submit" block>
+      
+      <Button variant="primary" type="submit" onClick={handleShow} block>
         Submit
       </Button>
 
-      
-      
-
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Successfuly submitted application.</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Please verify your application by clicking the link sent to your email address.
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={handleClose} block>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
 
     </Form>
 

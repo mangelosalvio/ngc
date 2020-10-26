@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Col, Form } from "react-bootstrap";
+import { Modal, Button, Col, Form } from "react-bootstrap";
 import axios from "axios";
 import { Formik, useFormik, useFormikContext } from "formik";
 import * as yup from "yup";
@@ -60,6 +60,13 @@ export default function BusinessForm() {
         .catch((err) => console.log(err));
     },
   });
+
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const onLoginFormSubmit = (e) => {
+    e.preventDefault();
+    handleClose();};
 
   return (
     <Form noValidate onSubmit={handleSubmit}>
@@ -452,9 +459,23 @@ export default function BusinessForm() {
         </Form.Text>
       </Form.Group>
 
-      <Button variant="primary" type="submit" block>
+      <Button variant="primary" type="submit" onClick={handleShow} block>
         Submit
       </Button>
+
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Successfuly submitted application.</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Please verify your application by clicking the link sent to your email address.
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={handleClose} block>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
     </Form>
   );
 }

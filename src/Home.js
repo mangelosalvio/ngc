@@ -5,12 +5,10 @@ import "bootstrap/dist/css/bootstrap.css";
 
 
 
-export default function App() {
+export default function Home() {
   const [show, setShow] = useState(false);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
   const onLoginFormSubmit = (e) => {
     e.preventDefault();
     handleClose();
@@ -28,13 +26,13 @@ export default function App() {
       </div>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-        <Modal.Title>Successfuly submitted application.</Modal.Title>
+          <Modal.Title>Successfuly submitted application.</Modal.Title>
         </Modal.Header>
         <Modal.Body>Please verify your application by clicking the link sent to your email address.
         </Modal.Body>
         <Modal.Footer>
           <Button variant="primary" onClick={handleClose}>
-            Close Modal
+            Close
           </Button>
         </Modal.Footer>
       </Modal>
