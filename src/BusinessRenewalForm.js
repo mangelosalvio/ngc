@@ -1,9 +1,13 @@
 import React, { useState } from "react";
-import { Button, Col, Form } from "react-bootstrap";
+import { Modal, Button, Col, Form } from "react-bootstrap";
 import axios from "axios";
 import { Formik, useFormik, useFormikContext } from "formik";
 import * as yup from "yup";
 import { useEffect } from "react";
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.css";
+
+
 
 const schema = yup.object({
   permit_number: yup.string().required("Permit number is Required"),
@@ -14,6 +18,7 @@ const schema = yup.object({
   contact_number: yup.string().required("Contact Number is Required"),
 
 });
+
 
 export default function BusinessRenewalForm() {
   const {
@@ -218,6 +223,7 @@ export default function BusinessRenewalForm() {
         Submit
       </Button>
 
+      
       
 
 

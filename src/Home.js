@@ -1,46 +1,43 @@
-
-import React from "react";
-//import Modal from 'react-bootstrap';
-import Modal from 'react-bootstrap/Modal';
-import { Button, Col, Form } from "react-bootstrap";
-
+import React, { useState } from "react";
+import { Modal, Button, Form } from "react-bootstrap";
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.css";
 
 
 
-function Example() {
+export default function App() {
   const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const onLoginFormSubmit = (e) => {
+    e.preventDefault();
+    handleClose();
+  };
 
   return (
     <>
-      <Button variant="primary" onClick={() => setShow(true)}>
-        Custom Width Modal
-      </Button>
-
-      <Modal
-        show={show}
-        onHide={() => setShow(false)}
-        dialogClassName="modal-90w"
-        aria-labelledby="example-custom-modal-styling-title"
+      <div
+        className="d-flex align-items-center justify-content-center"
+        style={{ height: "100vh" }}
       >
+        <Button variant="primary" onClick={handleShow}>
+          Submit
+        </Button>
+      </div>
+      <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title id="example-custom-modal-styling-title">
-            Custom Modal Styling
-          </Modal.Title>
+        <Modal.Title>Successfuly submitted application.</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          <p>
-            Ipsum molestiae natus adipisci modi eligendi? Debitis amet quae unde
-            commodi aspernatur enim, consectetur. Cumque deleniti temporibus
-            ipsam atque a dolores quisquam quisquam adipisci possimus
-            laboriosam. Quibusdam facilis doloribus debitis! Sit quasi quod
-            accusamus eos quod. Ab quos consequuntur eaque quo rem! Mollitia
-            reiciendis porro quo magni incidunt dolore amet atque facilis ipsum
-            deleniti rem!
-          </p>
+        <Modal.Body>Please verify your application by clicking the link sent to your email address.
         </Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={handleClose}>
+            Close Modal
+          </Button>
+        </Modal.Footer>
       </Modal>
     </>
   );
 }
-
-render(<Example />);
