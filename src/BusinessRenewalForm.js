@@ -82,7 +82,7 @@ export default function BusinessRenewalForm() {
           isValid={!errors.ban && touched.ban}
           value={values.ban}
           onChange={handleChange}
-          isInvalid={!!errors.ban}
+          isInvalid={!!errors.ban }
         >
         </Form.Control>
         <Form.Control.Feedback type="invalid">
@@ -217,6 +217,12 @@ export default function BusinessRenewalForm() {
       <Button variant="primary" type="submit" block>
         Submit
       </Button>
+
+      
+
+
     </Form>
+
+    
   );
 }
