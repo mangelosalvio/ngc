@@ -13,6 +13,10 @@ const schema = yup.object({
   business_name: yup.string().required("Business Name Required"),
   business_address: yup.string().required("Business Address Required"),
   barangay: yup.string().required("Barangay is Required"),
+  email_address: yup
+    .string()
+    .required("Email is Required")
+    .email("Email Format is Required"),
 });
 
 export default function BusinessRenewalForm() {
@@ -30,6 +34,7 @@ export default function BusinessRenewalForm() {
       business_name: "",
       business_address: "",
       barangay: "",
+      email_address: "",
     },
 
     validationSchema: schema,
@@ -218,6 +223,22 @@ export default function BusinessRenewalForm() {
           <Form.Text className="text-muted">Choose your barangay</Form.Text>
         </Form.Group>
       </Form.Row>
+      <Form.Group>
+        <Form.Label>Email Address</Form.Label>
+        <Form.Control
+          type="text"
+          name="email_address"
+          onChange={handleChange}
+          value={values.email_address}
+          isValid={!errors.email_address && touched.email_address}
+          isInvalid={!!errors.email_address}
+          placeholder="email_address"
+        />
+        <Form.Control.Feedback type="invalid">
+          {errors.email_address}
+        </Form.Control.Feedback>
+        <Form.Text className="text-muted">Enter your email address</Form.Text>
+      </Form.Group>
 
       <Button variant="primary" type="submit" block>
         Submit
