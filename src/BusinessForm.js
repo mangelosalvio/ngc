@@ -506,6 +506,8 @@ export default function BusinessForm() {
       <Button variant="primary" type="submit" block>
         Submit
       </Button>
+      
+      <br></br>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>

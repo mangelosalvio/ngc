@@ -244,6 +244,8 @@ export default function BusinessRenewalForm() {
         Submit
       </Button>
 
+      <br></br>
+
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Successfuly submitted application.</Modal.Title>
