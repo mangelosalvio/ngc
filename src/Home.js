@@ -25,7 +25,7 @@ export default function Home({ history }) {
           </Button>
         </Link>
         <Link to="/renewal">
-          <Button variant="secondary" size="lg" style={{ marginLeft: "1rem" }}>
+          <Button variant="primary" size="lg" style={{ marginLeft: "1rem" }}>
             Business Renewal
           </Button>
         </Link>
