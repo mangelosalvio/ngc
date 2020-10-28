@@ -114,7 +114,7 @@ export default function BusinessForm() {
         <Form.Control
           type="text"
           name="business_name"
-          placeholder="Enter Name"
+          placeholder="Business Name"
           isValid={!errors.business_name && touched.business_name}
           value={values.business_name}
           onChange={handleChange}
@@ -133,7 +133,7 @@ export default function BusinessForm() {
           <Form.Label>Business Address</Form.Label>
           <Form.Control
             type="text"
-            placeholder="Enter Address"
+            placeholder="Business Address"
             name="business_address"
             isValid={!errors.business_address && touched.business_address}
             value={values.business_address}
@@ -240,7 +240,7 @@ export default function BusinessForm() {
             value={values.telephone_number}
             isValid={!errors.telephone_number && touched.telephone_number}
             isInvalid={!!errors.telephone_number}
-            placeholder="Enter Phone"
+            placeholder="Telephone number"
           />
           <Form.Control.Feedback type="invalid">
             {errors.telephone_number}
@@ -279,7 +279,7 @@ export default function BusinessForm() {
           value={values.dti_sec}
           isValid={!errors.dti_sec && touched.dti_sec}
           isInvalid={!!errors.dti_sec}
-          placeholder="DTI/SEC"
+          placeholder="DTI/SEC Reg. No."
         />
         <Form.Control.Feedback type="invalid">
           {errors.dti_sec}
@@ -298,7 +298,7 @@ export default function BusinessForm() {
           value={values.date_of_registration}
           isValid={!errors.date_of_registration && touched.date_of_registration}
           isInvalid={!!errors.date_of_registration}
-          placeholder="date_of_registration"
+          placeholder="Date of Registration"
         />
         <Form.Control.Feedback type="invalid">
           {errors.date_of_registration}
@@ -320,7 +320,7 @@ export default function BusinessForm() {
           value={values.last_name}
           isValid={!errors.last_name && touched.last_name}
           isInvalid={!!errors.last_name}
-          placeholder="last_name"
+          placeholder="Lastname"
         />
         <Form.Control.Feedback type="invalid">
           {errors.last_name}
@@ -337,7 +337,7 @@ export default function BusinessForm() {
           value={values.first_name}
           isValid={!errors.first_name && touched.first_name}
           isInvalid={!!errors.first_name}
-          placeholder="first_name"
+          placeholder="Firstname"
         />
         <Form.Control.Feedback type="invalid">
           {errors.first_name}
@@ -354,7 +354,7 @@ export default function BusinessForm() {
           value={values.middle_name}
           isValid={!errors.middle_name && touched.middle_name}
           isInvalid={!!errors.middle_name}
-          placeholder="middle_name"
+          placeholder="Middlename"
         />
         <Form.Control.Feedback type="invalid">
           {errors.middle_name}
@@ -371,7 +371,7 @@ export default function BusinessForm() {
           value={values.taxpayer_address}
           isValid={!errors.taxpayer_address && touched.taxpayer_address}
           isInvalid={!!errors.taxpayer_address}
-          placeholder="taxpayer_address"
+          placeholder="Taxpayer Address"
         />
         <Form.Control.Feedback type="invalid">
           {errors.taxpayer_address}
@@ -389,7 +389,7 @@ export default function BusinessForm() {
             value={values.taxpayer_telephone}
             isValid={!errors.taxpayer_telephone && touched.taxpayer_telephone}
             isInvalid={!!errors.taxpayer_telephone}
-            placeholder="taxpayer_telephone"
+            placeholder="Taxpayer Telephone"
           />
           <Form.Control.Feedback type="invalid">
             {errors.taxpayer_telephone}
@@ -408,7 +408,7 @@ export default function BusinessForm() {
             value={values.taxpayer_mobile}
             isValid={!errors.taxpayer_mobile && touched.taxpayer_mobile}
             isInvalid={!!errors.taxpayer_mobile}
-            placeholder="taxpayer_mobile"
+            placeholder="Taxpayer Mobile"
           />
           <Form.Control.Feedback type="invalid">
             {errors.taxpayer_mobile}
@@ -428,7 +428,7 @@ export default function BusinessForm() {
           value={values.email_address}
           isValid={!errors.email_address && touched.email_address}
           isInvalid={!!errors.email_address}
-          placeholder="email_address"
+          placeholder="Email Address"
         />
         <Form.Control.Feedback type="invalid">
           {errors.email_address}
@@ -445,7 +445,7 @@ export default function BusinessForm() {
           value={values.contact_person}
           isValid={!errors.contact_person && touched.contact_person}
           isInvalid={!!errors.contact_person}
-          placeholder="contact_person"
+          placeholder="Contact Person"
         />
         <Form.Control.Feedback type="invalid">
           {errors.contact_person}
@@ -464,7 +464,7 @@ export default function BusinessForm() {
             !errors.contact_person_number && touched.contact_person_number
           }
           isInvalid={!!errors.contact_person_number}
-          placeholder="contact_person_number"
+          placeholder="Contact Person Number"
         />
         <Form.Control.Feedback type="invalid">
           {errors.contact_person_number}

@@ -70,7 +70,7 @@ export default function BusinessRenewalForm() {
         <Form.Control
           type="text"
           name="permit_number"
-          placeholder="Enter Permit Number"
+          placeholder="Permit Number"
           isValid={!errors.permit_number && touched.permit_number}
           value={values.permit_number}
           onChange={handleChange}
@@ -89,7 +89,7 @@ export default function BusinessRenewalForm() {
         <Form.Control
           type="text"
           name="ban"
-          placeholder="Enter Permit Number"
+          placeholder="Business Account Number"
           isValid={!errors.ban && touched.ban}
           value={values.ban}
           onChange={handleChange}
@@ -108,7 +108,7 @@ export default function BusinessRenewalForm() {
         <Form.Control
           type="text"
           name="business_name"
-          placeholder="Enter Name"
+          placeholder="Businessname"
           value={values.business_name}
           onChange={handleChange}
           isValid={!errors.business_name && touched.business_name}
@@ -127,7 +127,7 @@ export default function BusinessRenewalForm() {
           <Form.Label>Business Address</Form.Label>
           <Form.Control
             type="text"
-            placeholder="Enter Address"
+            placeholder="Business Address"
             name="business_address"
             isValid={!errors.business_address && touched.business_address}
             value={values.business_address}
@@ -232,7 +232,7 @@ export default function BusinessRenewalForm() {
           value={values.email_address}
           isValid={!errors.email_address && touched.email_address}
           isInvalid={!!errors.email_address}
-          placeholder="email_address"
+          placeholder="Email Address"
         />
         <Form.Control.Feedback type="invalid">
           {errors.email_address}
