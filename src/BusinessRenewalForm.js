@@ -79,9 +79,7 @@ export default function BusinessRenewalForm() {
         <Form.Control.Feedback type="invalid">
           {errors.permit_number}
         </Form.Control.Feedback>
-        <Form.Text className="text-muted">
-          Enter your type of business
-        </Form.Text>
+
       </Form.Group>
 
       <Form.Group controlId="ban">
@@ -98,9 +96,7 @@ export default function BusinessRenewalForm() {
         <Form.Control.Feedback type="invalid">
           {errors.ban}
         </Form.Control.Feedback>
-        <Form.Text className="text-muted">
-          Enter your type of business
-        </Form.Text>
+
       </Form.Group>
 
       <Form.Group controlId="business_name_form">
@@ -108,7 +104,7 @@ export default function BusinessRenewalForm() {
         <Form.Control
           type="text"
           name="business_name"
-          placeholder="Businessname"
+          placeholder="Business Name"
           value={values.business_name}
           onChange={handleChange}
           isValid={!errors.business_name && touched.business_name}
@@ -117,9 +113,7 @@ export default function BusinessRenewalForm() {
         <Form.Control.Feedback type="invalid">
           {errors.business_name}
         </Form.Control.Feedback>
-        <Form.Text className="text-muted">
-          Enter the name of your business
-        </Form.Text>
+
       </Form.Group>
 
       <Form.Row>
@@ -127,7 +121,7 @@ export default function BusinessRenewalForm() {
           <Form.Label>Business Address</Form.Label>
           <Form.Control
             type="text"
-            placeholder="Business Address"
+            placeholder="House#/BLDG#, Street, Subdivision/Purok, City"
             name="business_address"
             isValid={!errors.business_address && touched.business_address}
             value={values.business_address}
@@ -137,10 +131,7 @@ export default function BusinessRenewalForm() {
           <Form.Control.Feedback type="invalid">
             {errors.business_address}
           </Form.Control.Feedback>
-          <Form.Text className="text-muted">
-            Enter your business address in the following format: House#, Street,
-            Subdivision or Purok, City
-          </Form.Text>
+
         </Form.Group>
 
         <Form.Group>
@@ -220,7 +211,7 @@ export default function BusinessRenewalForm() {
             {errors.barangay}
           </Form.Control.Feedback>
 
-          <Form.Text className="text-muted">Choose your barangay</Form.Text>
+          
         </Form.Group>
       </Form.Row>
       <Form.Group>
@@ -237,7 +228,7 @@ export default function BusinessRenewalForm() {
         <Form.Control.Feedback type="invalid">
           {errors.email_address}
         </Form.Control.Feedback>
-        <Form.Text className="text-muted">Enter your email address</Form.Text>
+        
       </Form.Group>
 
       <Button variant="primary" type="submit" block>

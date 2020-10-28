@@ -25,7 +25,7 @@ const schema = yup.object({
     .email("Email Format Required"),
   contact_person: yup.string().required("Contact Person Required"),
   contact_person_number: yup.string().required("Contact Person Required"),
-  type_of_property: yup.string().required("Lease type required"),
+  type_of_property: yup.string().required("Property type required"),
   barangay: yup.string().required("Barangay Required"),
 });
 
@@ -104,9 +104,7 @@ export default function BusinessForm() {
         <Form.Control.Feedback type="invalid">
           {errors.type_of_business}
         </Form.Control.Feedback>
-        <Form.Text className="text-muted">
-          Enter your type of business
-        </Form.Text>
+
       </Form.Group>
 
       <Form.Group controlId="business_name_form">
@@ -114,7 +112,7 @@ export default function BusinessForm() {
         <Form.Control
           type="text"
           name="business_name"
-          placeholder="Business Name"
+          placeholder="Enter the name of your business"
           isValid={!errors.business_name && touched.business_name}
           value={values.business_name}
           onChange={handleChange}
@@ -123,9 +121,7 @@ export default function BusinessForm() {
         <Form.Control.Feedback type="invalid">
           {errors.business_name}
         </Form.Control.Feedback>
-        <Form.Text className="text-muted">
-          Enter the name of your business
-        </Form.Text>
+
       </Form.Group>
 
       <Form.Row>
@@ -133,7 +129,7 @@ export default function BusinessForm() {
           <Form.Label>Business Address</Form.Label>
           <Form.Control
             type="text"
-            placeholder="Business Address"
+            placeholder="House#/BLDG#, Street, Subdivision/Purok, City"
             name="business_address"
             isValid={!errors.business_address && touched.business_address}
             value={values.business_address}
@@ -143,10 +139,7 @@ export default function BusinessForm() {
           <Form.Control.Feedback type="invalid">
             {errors.business_address}
           </Form.Control.Feedback>
-          <Form.Text className="text-muted">
-            Enter your business address in the following format: House#, Street,
-            Subdivision or Purok, City
-          </Form.Text>
+
         </Form.Group>
 
         <Form.Group>
@@ -226,7 +219,7 @@ export default function BusinessForm() {
             {errors.barangay}
           </Form.Control.Feedback>
 
-          <Form.Text className="text-muted">Choose your barangay</Form.Text>
+          
         </Form.Group>
       </Form.Row>
 
@@ -240,14 +233,12 @@ export default function BusinessForm() {
             value={values.telephone_number}
             isValid={!errors.telephone_number && touched.telephone_number}
             isInvalid={!!errors.telephone_number}
-            placeholder="Telephone number"
+            placeholder="e.g. 434XXXX"
           />
           <Form.Control.Feedback type="invalid">
             {errors.telephone_number}
           </Form.Control.Feedback>
-          <Form.Text className="text-muted">
-            Enter business phone number in the following fornat: e.g. 4441234
-          </Form.Text>
+
         </Form.Group>
 
         <Form.Group as={Col}>
@@ -259,14 +250,12 @@ export default function BusinessForm() {
             value={values.mobile_number}
             isValid={!errors.mobile_number && touched.mobile_number}
             isInvalid={!!errors.mobile_number}
-            placeholder="mobile_number"
+            placeholder="09XXXXXXXXX"
           />
           <Form.Control.Feedback type="invalid">
             {errors.mobile_number}
           </Form.Control.Feedback>
-          <Form.Text className="text-muted">
-            Enter mobile number in the following format: 09097770000
-          </Form.Text>
+
         </Form.Group>
       </Form.Row>
 
@@ -284,9 +273,7 @@ export default function BusinessForm() {
         <Form.Control.Feedback type="invalid">
           {errors.dti_sec}
         </Form.Control.Feedback>
-        <Form.Text className="text-muted">
-          Enter your DTI/SEC/CDA Reg. No.
-        </Form.Text>
+
       </Form.Group>
 
       <Form.Group>
@@ -303,9 +290,7 @@ export default function BusinessForm() {
         <Form.Control.Feedback type="invalid">
           {errors.date_of_registration}
         </Form.Control.Feedback>
-        <Form.Text className="text-muted">
-          Enter the date of registration
-        </Form.Text>
+
       </Form.Group>
 
       <hr></hr>
@@ -325,7 +310,7 @@ export default function BusinessForm() {
         <Form.Control.Feedback type="invalid">
           {errors.last_name}
         </Form.Control.Feedback>
-        <Form.Text className="text-muted">Enter your Lastname</Form.Text>
+
       </Form.Group>
 
       <Form.Group>
@@ -342,7 +327,7 @@ export default function BusinessForm() {
         <Form.Control.Feedback type="invalid">
           {errors.first_name}
         </Form.Control.Feedback>
-        <Form.Text className="text-muted">Enter your Firstname</Form.Text>
+
       </Form.Group>
 
       <Form.Group>
@@ -359,7 +344,7 @@ export default function BusinessForm() {
         <Form.Control.Feedback type="invalid">
           {errors.middle_name}
         </Form.Control.Feedback>
-        <Form.Text className="text-muted">Enter your Middlename</Form.Text>
+
       </Form.Group>
 
       <Form.Group>
@@ -371,12 +356,12 @@ export default function BusinessForm() {
           value={values.taxpayer_address}
           isValid={!errors.taxpayer_address && touched.taxpayer_address}
           isInvalid={!!errors.taxpayer_address}
-          placeholder="Taxpayer Address"
+          placeholder="House#/BLDG#, Street, Subdivision/Purok, City"
         />
         <Form.Control.Feedback type="invalid">
           {errors.taxpayer_address}
         </Form.Control.Feedback>
-        <Form.Text className="text-muted">Enter your address</Form.Text>
+
       </Form.Group>
 
       <Form.Row>
@@ -389,7 +374,7 @@ export default function BusinessForm() {
             value={values.taxpayer_telephone}
             isValid={!errors.taxpayer_telephone && touched.taxpayer_telephone}
             isInvalid={!!errors.taxpayer_telephone}
-            placeholder="Taxpayer Telephone"
+            placeholder="e.g. 434XXXX"
           />
           <Form.Control.Feedback type="invalid">
             {errors.taxpayer_telephone}
@@ -408,14 +393,12 @@ export default function BusinessForm() {
             value={values.taxpayer_mobile}
             isValid={!errors.taxpayer_mobile && touched.taxpayer_mobile}
             isInvalid={!!errors.taxpayer_mobile}
-            placeholder="Taxpayer Mobile"
+            placeholder="09XXXXXXXXX"
           />
           <Form.Control.Feedback type="invalid">
             {errors.taxpayer_mobile}
           </Form.Control.Feedback>
-          <Form.Text className="text-muted">
-            Enter mobile number in the following format: 09097770000
-          </Form.Text>
+
         </Form.Group>
       </Form.Row>
 
@@ -433,7 +416,7 @@ export default function BusinessForm() {
         <Form.Control.Feedback type="invalid">
           {errors.email_address}
         </Form.Control.Feedback>
-        <Form.Text className="text-muted">Enter your email address</Form.Text>
+
       </Form.Group>
 
       <Form.Group>
@@ -445,12 +428,12 @@ export default function BusinessForm() {
           value={values.contact_person}
           isValid={!errors.contact_person && touched.contact_person}
           isInvalid={!!errors.contact_person}
-          placeholder="Contact Person"
+          placeholder="Name of Contact Person"
         />
         <Form.Control.Feedback type="invalid">
           {errors.contact_person}
         </Form.Control.Feedback>
-        <Form.Text className="text-muted">Enter name</Form.Text>
+
       </Form.Group>
 
       <Form.Group>
@@ -464,14 +447,12 @@ export default function BusinessForm() {
             !errors.contact_person_number && touched.contact_person_number
           }
           isInvalid={!!errors.contact_person_number}
-          placeholder="Contact Person Number"
+          placeholder="Contact Number of Contact Person"
         />
         <Form.Control.Feedback type="invalid">
           {errors.contact_person_number}
         </Form.Control.Feedback>
-        <Form.Text className="text-muted">
-          Enter your name in the following format ; e.g. Dela, Cruz Juan
-        </Form.Text>
+
       </Form.Group>
 
       <div className="title">Business Property</div>
