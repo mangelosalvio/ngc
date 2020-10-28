@@ -57,7 +57,7 @@ export default function BusinessForm() {
       email_address: "",
       contact_person: "",
       contact_person_number: "",
-      type_of_lease: "",
+      type_of_property: "",
     },
     validationSchema: schema,
     onSubmit: (values, { setValues, resetForm }) => {
@@ -68,10 +68,10 @@ export default function BusinessForm() {
           if (response.data) {
             resetForm();
             setShow(true);
-             setValues((prevState) => ({
-               ...prevState,
-               ...response.data,
-             }));
+            setValues((prevState) => ({
+              ...prevState,
+              ...response.data,
+            }));
           }
         })
         .catch((err) => console.log(err));
@@ -104,7 +104,6 @@ export default function BusinessForm() {
         <Form.Control.Feedback type="invalid">
           {errors.type_of_business}
         </Form.Control.Feedback>
-
       </Form.Group>
 
       <Form.Group controlId="business_name_form">
@@ -121,7 +120,6 @@ export default function BusinessForm() {
         <Form.Control.Feedback type="invalid">
           {errors.business_name}
         </Form.Control.Feedback>
-
       </Form.Group>
 
       <Form.Row>
@@ -139,7 +137,6 @@ export default function BusinessForm() {
           <Form.Control.Feedback type="invalid">
             {errors.business_address}
           </Form.Control.Feedback>
-
         </Form.Group>
 
         <Form.Group>
@@ -218,8 +215,6 @@ export default function BusinessForm() {
           <Form.Control.Feedback type="invalid">
             {errors.barangay}
           </Form.Control.Feedback>
-
-          
         </Form.Group>
       </Form.Row>
 
@@ -238,7 +233,6 @@ export default function BusinessForm() {
           <Form.Control.Feedback type="invalid">
             {errors.telephone_number}
           </Form.Control.Feedback>
-
         </Form.Group>
 
         <Form.Group as={Col}>
@@ -255,7 +249,6 @@ export default function BusinessForm() {
           <Form.Control.Feedback type="invalid">
             {errors.mobile_number}
           </Form.Control.Feedback>
-
         </Form.Group>
       </Form.Row>
 
@@ -273,7 +266,6 @@ export default function BusinessForm() {
         <Form.Control.Feedback type="invalid">
           {errors.dti_sec}
         </Form.Control.Feedback>
-
       </Form.Group>
 
       <Form.Group>
@@ -290,7 +282,6 @@ export default function BusinessForm() {
         <Form.Control.Feedback type="invalid">
           {errors.date_of_registration}
         </Form.Control.Feedback>
-
       </Form.Group>
 
       <hr></hr>
@@ -310,7 +301,6 @@ export default function BusinessForm() {
         <Form.Control.Feedback type="invalid">
           {errors.last_name}
         </Form.Control.Feedback>
-
       </Form.Group>
 
       <Form.Group>
@@ -327,7 +317,6 @@ export default function BusinessForm() {
         <Form.Control.Feedback type="invalid">
           {errors.first_name}
         </Form.Control.Feedback>
-
       </Form.Group>
 
       <Form.Group>
@@ -344,7 +333,6 @@ export default function BusinessForm() {
         <Form.Control.Feedback type="invalid">
           {errors.middle_name}
         </Form.Control.Feedback>
-
       </Form.Group>
 
       <Form.Group>
@@ -361,7 +349,6 @@ export default function BusinessForm() {
         <Form.Control.Feedback type="invalid">
           {errors.taxpayer_address}
         </Form.Control.Feedback>
-
       </Form.Group>
 
       <Form.Row>
@@ -398,7 +385,6 @@ export default function BusinessForm() {
           <Form.Control.Feedback type="invalid">
             {errors.taxpayer_mobile}
           </Form.Control.Feedback>
-
         </Form.Group>
       </Form.Row>
 
@@ -416,7 +402,6 @@ export default function BusinessForm() {
         <Form.Control.Feedback type="invalid">
           {errors.email_address}
         </Form.Control.Feedback>
-
       </Form.Group>
 
       <Form.Group>
@@ -433,7 +418,6 @@ export default function BusinessForm() {
         <Form.Control.Feedback type="invalid">
           {errors.contact_person}
         </Form.Control.Feedback>
-
       </Form.Group>
 
       <Form.Group>
@@ -452,7 +436,6 @@ export default function BusinessForm() {
         <Form.Control.Feedback type="invalid">
           {errors.contact_person_number}
         </Form.Control.Feedback>
-
       </Form.Group>
 
       <div className="title">Business Property</div>
@@ -461,7 +444,7 @@ export default function BusinessForm() {
         <Form.Label>Type of Property</Form.Label>
         <Form.Control
           as="select"
-          name="type_of_lease"
+          name="type_of_property"
           isValid={!errors.type_of_property && touched.type_of_property}
           value={values.type_of_property}
           onChange={handleChange}
@@ -487,7 +470,7 @@ export default function BusinessForm() {
       <Button variant="primary" type="submit" block>
         Submit
       </Button>
-      
+
       <br></br>
 
       <Modal show={show} onHide={handleClose}>
