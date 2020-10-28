@@ -20,13 +20,7 @@ function App() {
         <Navbar.Brand href="#home">BPLO</Navbar.Brand>
         <Nav className="mr-auto">
           <Nav.Link href="#home">
-            <Link to="/">Home</Link>
-          </Nav.Link>
-          <Nav.Link href="#features">
-            <Link to="/business">New Business</Link>
-          </Nav.Link>
-          <Nav.Link href="#renewal">
-            <Link to="/renewal">Renewal</Link>
+            <Link to="/">Online Services</Link>
           </Nav.Link>
         </Nav>
       </Navbar>

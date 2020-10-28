@@ -59,7 +59,7 @@ export default function BusinessForm() {
       contact_person_number: "",
       type_of_lease: "",
     },
-    //validationSchema: schema,
+    validationSchema: schema,
     onSubmit: (values, { setValues, resetForm }) => {
       console.log(values);
       axios
@@ -68,10 +68,10 @@ export default function BusinessForm() {
           if (response.data) {
             resetForm();
             setShow(true);
-            // setValues((prevState) => ({
-            //   ...prevState,
-            //   ...response.data,
-            // }));
+             setValues((prevState) => ({
+               ...prevState,
+               ...response.data,
+             }));
           }
         })
         .catch((err) => console.log(err));
@@ -83,7 +83,7 @@ export default function BusinessForm() {
 
   return (
     <Form noValidate onSubmit={handleSubmit}>
-      <div className="form-header">APPLICATION FORM FOR NEW BUSINESS</div>
+      <div className="form-header">APPLICATION FOR NEW BUSINESS</div>
 
       <Form.Group controlId="type_of_business_form">
         <Form.Label>Type of Business</Form.Label>

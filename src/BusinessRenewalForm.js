@@ -46,10 +46,10 @@ export default function BusinessRenewalForm() {
           if (response.data) {
             resetForm();
             setShow(true);
-            // setValues((prevState) => ({
-            //   ...prevState,
-            //   ...response.data,
-            // }));
+             setValues((prevState) => ({
+               ...prevState,
+               ...response.data,
+             }));
           }
         })
         .catch((err) => console.log(err));
@@ -62,7 +62,7 @@ export default function BusinessRenewalForm() {
   return (
     <Form noValidate onSubmit={handleSubmit}>
       <div className="form-header">
-        Application Form For Renewal of Business
+        Application For Renewal of Business
       </div>
 
       <Form.Group controlId="permit_number">
