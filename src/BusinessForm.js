@@ -25,7 +25,7 @@ const schema = yup.object({
     .email("Email Format Required"),
   contact_person: yup.string().required("Contact Person Required"),
   contact_person_number: yup.string().required("Contact Person Required"),
-  type_of_lease: yup.string().required("Lease type required"),
+  type_of_property: yup.string().required("Lease type required"),
   barangay: yup.string().required("Barangay Required"),
 });
 
@@ -290,7 +290,7 @@ export default function BusinessForm() {
       </Form.Group>
 
       <Form.Group>
-        <Form.Label>Date of Registration</Form.Label>
+        <Form.Label>DTI Date of Registration</Form.Label>
         <Form.Control
           type="date"
           name="date_of_registration"
@@ -477,21 +477,21 @@ export default function BusinessForm() {
       <div className="title">Business Property</div>
 
       <Form.Group>
-        <Form.Label>Type of Lease</Form.Label>
+        <Form.Label>Type of Property</Form.Label>
         <Form.Control
           as="select"
           name="type_of_lease"
-          isValid={!errors.type_of_lease && touched.type_of_lease}
-          value={values.type_of_lease}
+          isValid={!errors.type_of_property && touched.type_of_property}
+          value={values.type_of_property}
           onChange={handleChange}
-          isInvalid={!!errors.type_of_lease}
+          isInvalid={!!errors.type_of_property}
         >
           <option value="">Select Type of Lease</option>
           <option>Owned</option>
           <option>Rented</option>
         </Form.Control>
         <Form.Control.Feedback type="invalid">
-          {errors.type_of_lease}
+          {errors.type_of_property}
         </Form.Control.Feedback>
 
         <Form.Text className="text-muted">
