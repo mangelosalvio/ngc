@@ -46,10 +46,6 @@ export default function BusinessRenewalForm() {
           if (response.data) {
             resetForm();
             setShow(true);
-             setValues((prevState) => ({
-               ...prevState,
-               ...response.data,
-             }));
           }
         })
         .catch((err) => console.log(err));
@@ -61,9 +57,7 @@ export default function BusinessRenewalForm() {
 
   return (
     <Form noValidate onSubmit={handleSubmit}>
-      <div className="form-header">
-        Application For Renewal of Business
-      </div>
+      <div className="form-header">Application For Renewal of Business</div>
 
       <Form.Group controlId="permit_number">
         <Form.Label>Permit Number</Form.Label>
@@ -79,7 +73,6 @@ export default function BusinessRenewalForm() {
         <Form.Control.Feedback type="invalid">
           {errors.permit_number}
         </Form.Control.Feedback>
-
       </Form.Group>
 
       <Form.Group controlId="ban">
@@ -96,7 +89,6 @@ export default function BusinessRenewalForm() {
         <Form.Control.Feedback type="invalid">
           {errors.ban}
         </Form.Control.Feedback>
-
       </Form.Group>
 
       <Form.Group controlId="business_name_form">
@@ -113,7 +105,6 @@ export default function BusinessRenewalForm() {
         <Form.Control.Feedback type="invalid">
           {errors.business_name}
         </Form.Control.Feedback>
-
       </Form.Group>
 
       <Form.Row>
@@ -131,7 +122,6 @@ export default function BusinessRenewalForm() {
           <Form.Control.Feedback type="invalid">
             {errors.business_address}
           </Form.Control.Feedback>
-
         </Form.Group>
 
         <Form.Group>
@@ -210,8 +200,6 @@ export default function BusinessRenewalForm() {
           <Form.Control.Feedback type="invalid">
             {errors.barangay}
           </Form.Control.Feedback>
-
-          
         </Form.Group>
       </Form.Row>
       <Form.Group>
@@ -228,7 +216,6 @@ export default function BusinessRenewalForm() {
         <Form.Control.Feedback type="invalid">
           {errors.email_address}
         </Form.Control.Feedback>
-        
       </Form.Group>
 
       <Button variant="primary" type="submit" block>

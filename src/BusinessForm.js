@@ -68,10 +68,6 @@ export default function BusinessForm() {
           if (response.data) {
             resetForm();
             setShow(true);
-            setValues((prevState) => ({
-              ...prevState,
-              ...response.data,
-            }));
           }
         })
         .catch((err) => console.log(err));
