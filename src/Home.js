@@ -15,9 +15,10 @@ export default function Home({ history }) {
 
   return (
     <>
+      <div className="logo"></div>
       <div
         className="d-flex align-items-center justify-content-center"
-        style={{ height: "100vh" }}
+        style={{ height: "10vh" }}
       >
         <Link to="/business">
           <Button variant="primary" size="lg">

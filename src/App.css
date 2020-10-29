@@ -52,12 +52,10 @@
   font-size: 28px;
 }
 
-.background {
-  background-image: url("https://iili.io/3lgrwQ.jpg");
+.logo {
+  background-image: url("https://beeimg.com/images/b36021800863.jpg");
   background-position: center;
-  text-align: center;
   background-repeat: no-repeat;
-  background-size: 150px 140px;
-  height: 150px;
-}
+  height: 350px;
 
+}
