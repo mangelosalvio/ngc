@@ -53,9 +53,11 @@
 }
 
 .logo {
-  background-image: url("https://beeimg.com/images/b36021800863.jpg");
+  background-image: url(//beeimg.com/images/b36021800863.jpg);
+  align-content: center;
   background-position: center;
   background-repeat: no-repeat;
   height: 350px;
+  justify-content: center;
 
 }
