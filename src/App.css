@@ -41,13 +41,13 @@
   margin-top: 1rem;
 }
 
-.form-header { 
+.form-header {
   text-align: center;
   font-weight: bold;
   font-size: 28px;
 }
 
-.title { 
+.title {
   text-align: center;
   font-size: 28px;
 }
@@ -59,11 +59,30 @@
   background-repeat: no-repeat;
   height: 350px;
   justify-content: center;
-
 }
 
-.button{
+.button {
   justify-content: center;
   align-content: center;
   size: lg;
+}
+
+.margin-bottom-5 {
+  margin-bottom: 300px;
+}
+
+.is-error {
+  color: #dc3545;
+  font-size: 80%;
+  margin-top: 0.25rem;
+}
+
+.has-error.form-group .SingleDatePickerInput {
+  border-color: #dc3545 !important;
+}
+.DateInput_input {
+  font-size: 1rem !important;
+  padding: 6px 36px 6px 12px !important;
+  color: #495057 !important;
+  font-weight: 400 !important;
 }

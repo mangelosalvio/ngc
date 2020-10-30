@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "react-dates/initialize";
 import logo from "./logo.svg";
 import setAxiosHeader from "./setAxiosHeader";
 import "./App.css";
@@ -8,6 +9,7 @@ import BusinessForm from "./BusinessForm";
 import Home from "./Home";
 import { Col, Container, Nav, Navbar, Row } from "react-bootstrap";
 import BusinessRenewalForm from "./BusinessRenewalForm";
+import "react-dates/lib/css/_datepicker.css";
 
 setAxiosHeader();
 

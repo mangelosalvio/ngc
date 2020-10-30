@@ -4,6 +4,9 @@ import axios from "axios";
 import { Formik, useFormik, useFormikContext } from "formik";
 import * as yup from "yup";
 import { useEffect } from "react";
+import { SingleDatePicker } from "react-dates";
+import moment from "moment";
+import classnames from "classnames";
 
 const schema = yup.object({
   type_of_business: yup.string().required("Type of Business is Required"),
@@ -27,6 +30,8 @@ const schema = yup.object({
   contact_person_number: yup.string().required("Contact Person Required"),
   type_of_property: yup.string().required("Property type required"),
   barangay: yup.string().required("Barangay Required"),
+  time_of_day: yup.string().required("Time of Day is Required"),
+  appointment_date: yup.date().required("Appointment Date is required"),
 });
 
 export default function BusinessForm() {
@@ -37,6 +42,7 @@ export default function BusinessForm() {
     handleChange,
     handleSubmit,
     setValues,
+    setFieldValue,
   } = useFormik({
     initialValues: {
       type_of_business: "",
@@ -58,11 +64,14 @@ export default function BusinessForm() {
       contact_person: "",
       contact_person_number: "",
       type_of_property: "",
+      time_of_day: "",
+      appointment_date: "",
+      appointment_date_focused: false,
     },
     validationSchema: schema,
     onSubmit: (values, { setValues, resetForm }) => {
-      console.log(values);
-      axios
+      console.log(values.appointment_date, errors);
+      /* axios
         .put("/", values)
         .then((response) => {
           if (response.data) {
@@ -70,7 +79,7 @@ export default function BusinessForm() {
             setShow(true);
           }
         })
-        .catch((err) => console.log(err));
+        .catch((err) => console.log(err)); */
     },
   });
 
@@ -78,7 +87,7 @@ export default function BusinessForm() {
   const handleClose = () => setShow(false);
 
   return (
-    <Form noValidate onSubmit={handleSubmit}>
+    <Form noValidate onSubmit={handleSubmit} className="margin-bottom-5">
       <div className="form-header">APPLICATION FOR NEW BUSINESS</div>
 
       <Form.Group controlId="type_of_business_form">
@@ -461,6 +470,50 @@ export default function BusinessForm() {
           If Rented: Please Present a photocopy of Contract of Lease upon
           submission of documents to the Business Permits and Licensing Office.
         </Form.Text>
+      </Form.Group>
+
+      <br />
+      <br />
+
+      <div className="title">Appointment Schedule</div>
+
+      <Form.Group
+        className={classnames({
+          "has-error": errors.appointment_date,
+        })}
+      >
+        <Form.Label>Appointment Date</Form.Label> <br />
+        <SingleDatePicker
+          date={values.appointment_date} // momentPropTypes.momentObj or null
+          onDateChange={(date) => setFieldValue("appointment_date", date)} // PropTypes.func.isRequired
+          focused={values.appointment_date_focused} // PropTypes.bool
+          onFocusChange={({ focused }) =>
+            setFieldValue("appointment_date_focused", focused)
+          } // PropTypes.func.isRequired
+          id="appointment-date" // PropTypes.string.isRequired,
+        />
+        {errors.appointment_date && (
+          <div className="is-error">{errors.appointment_date}</div>
+        )}
+      </Form.Group>
+
+      <Form.Group>
+        <Form.Label>Time of Day</Form.Label>
+        <Form.Control
+          as="select"
+          name="time_of_day"
+          isValid={!errors.time_of_day && touched.time_of_day}
+          value={values.time_of_day}
+          onChange={handleChange}
+          isInvalid={!!errors.time_of_day}
+        >
+          <option value="">Select Time of Day</option>
+          <option>AM</option>
+          <option>PM</option>
+        </Form.Control>
+        <Form.Control.Feedback type="invalid">
+          {errors.time_of_day}
+        </Form.Control.Feedback>
       </Form.Group>
 
       <Button variant="primary" type="submit" block>
