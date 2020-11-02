@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Modal, Button, Col, Form } from "react-bootstrap";
 import axios from "axios";
 import { Formik, useFormik, useFormikContext } from "formik";
@@ -6,6 +6,10 @@ import * as yup from "yup";
 import { useEffect } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.css";
+import { SingleDatePicker } from "react-dates";
+import moment from "moment";
+import classnames from "classnames";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const schema = yup.object({
   permit_number: yup.string().required("Permit Number is Required"),
@@ -17,7 +21,22 @@ const schema = yup.object({
     .string()
     .required("Email is Required")
     .email("Email Format is Required"),
+  time_of_day: yup.string().required("Time of Day is Required"),
+  appointment_date: yup.date().required("Appointment Date is required"),
 });
+
+const getUnavailableDays = ({ setUnavailableDates }) => {
+  axios
+    .get("/unavailable-business-dates-renewal")
+    .then((response) => {
+      if (response.data) {
+        setUnavailableDates(response.data);
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
 
 export default function BusinessRenewalForm() {
   const {
@@ -27,6 +46,7 @@ export default function BusinessRenewalForm() {
     handleChange,
     handleSubmit,
     setValues,
+    setFieldValue,
   } = useFormik({
     initialValues: {
       permit_number: "",
@@ -35,17 +55,28 @@ export default function BusinessRenewalForm() {
       business_address: "",
       barangay: "",
       email_address: "",
+      time_of_day: "",
+      appointment_date: "",
+      appointment_date_focused: false,
     },
 
     validationSchema: schema,
     onSubmit: (values, { setValues, resetForm }) => {
-      console.log(values);
+      if (!recaptcha) {
+        setRecaptchaError("Check the checkbox");
+        return;
+      }
+
       axios
         .put("/renewal", values)
         .then((response) => {
           if (response.data) {
+            recaptchaRef.current.reset();
+            setRecaptchaError("");
+            setRecaptcha(null);
             resetForm();
             setShow(true);
+            getUnavailableDays({ setUnavailableDates });
           }
         })
         .catch((err) => console.log(err));
@@ -54,6 +85,34 @@ export default function BusinessRenewalForm() {
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
+
+  const [unavailable_dates, setUnavailableDates] = useState([]);
+  const [unavailable_time_of_day, setUnavailableTimeOfDay] = useState([]);
+  const [time_of_days, setTimeOfDays] = useState(["AM", "PM"]);
+
+  const [recaptcha, setRecaptcha] = useState(null);
+  const [recaptcha_error, setRecaptchaError] = useState(null);
+
+  const recaptchaRef = useRef(null);
+
+  useEffect(() => {
+    getUnavailableDays({ setUnavailableDates });
+    return () => {};
+  }, []);
+
+  useEffect(() => {
+    axios
+      .post("/unavailable-time-of-day-renewal", {
+        date: values.appointment_date,
+      })
+      .then((response) => {
+        if (response.data) {
+          setUnavailableTimeOfDay(response.data);
+        }
+      })
+      .catch((err) => console.log(err));
+    return () => {};
+  }, [values.appointment_date]);
 
   return (
     <Form noValidate onSubmit={handleSubmit}>
@@ -218,7 +277,74 @@ export default function BusinessRenewalForm() {
         </Form.Control.Feedback>
       </Form.Group>
 
-      <Button variant="primary" type="submit" block>
+      <Form.Group
+        className={classnames({
+          "has-error": errors.appointment_date,
+        })}
+      >
+        <Form.Label>Appointment Date</Form.Label> <br />
+        <SingleDatePicker
+          date={
+            values.appointment_date ? moment(values.appointment_date) : null
+          } // momentPropTypes.momentObj or null
+          onDateChange={(date) => setFieldValue("appointment_date", date)} // PropTypes.func.isRequired
+          focused={values.appointment_date_focused} // PropTypes.bool
+          onFocusChange={({ focused }) =>
+            setFieldValue("appointment_date_focused", focused)
+          } // PropTypes.func.isRequired
+          id="appointment-date" // PropTypes.string.isRequired,
+          minDate={moment().add({ days: 2 })}
+          isDayBlocked={(moment_date) => {
+            const has_same =
+              unavailable_dates.filter((o) => {
+                return moment_date.isSame(o.date, "day");
+              }).length > 0;
+
+            return (
+              has_same ||
+              moment_date.weekday() === 0 ||
+              moment_date.isBefore(moment().add({ days: 1 }))
+            );
+          }}
+        />
+        {errors.appointment_date && (
+          <div className="is-error">{errors.appointment_date}</div>
+        )}
+      </Form.Group>
+
+      <Form.Group>
+        <Form.Label>Time of Day</Form.Label>
+        <Form.Control
+          as="select"
+          name="time_of_day"
+          disabled={!values.appointment_date}
+          isValid={!errors.time_of_day && touched.time_of_day}
+          value={values.time_of_day}
+          onChange={handleChange}
+          isInvalid={!!errors.time_of_day}
+        >
+          <option value="">Select Time of Day</option>
+          {time_of_days
+            .filter((o) => {
+              return !unavailable_time_of_day.includes(o);
+            })
+            .map((o) => (
+              <option key={o}>{o}</option>
+            ))}
+        </Form.Control>
+        <Form.Control.Feedback type="invalid">
+          {errors.time_of_day}
+        </Form.Control.Feedback>
+      </Form.Group>
+
+      <ReCAPTCHA
+        sitekey={process.env.REACT_APP_SITEKEY}
+        ref={recaptchaRef}
+        onChange={(o) => setRecaptcha(o)}
+      />
+      {recaptcha_error && <div className="is-error">{recaptcha_error}</div>}
+
+      <Button variant="primary" type="submit" block className="m-t-1">
         Submit
       </Button>
 
