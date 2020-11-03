@@ -10,6 +10,7 @@ import { SingleDatePicker } from "react-dates";
 import moment from "moment";
 import classnames from "classnames";
 import ReCAPTCHA from "react-google-recaptcha";
+import moment_tz from "moment-timezone";
 
 const schema = yup.object({
   permit_number: yup.string().required("Permit Number is Required"),
@@ -293,7 +294,7 @@ export default function BusinessRenewalForm() {
             setFieldValue("appointment_date_focused", focused)
           } // PropTypes.func.isRequired
           id="appointment-date" // PropTypes.string.isRequired,
-          minDate={moment().add({ days: 2 })}
+          minDate={moment_tz().tz("Asia/Manila").add({ days: 2 })}
           isDayBlocked={(moment_date) => {
             const has_same =
               unavailable_dates.filter((o) => {
@@ -303,7 +304,10 @@ export default function BusinessRenewalForm() {
             return (
               has_same ||
               moment_date.weekday() === 0 ||
-              moment_date.isBefore(moment().add({ days: 1 }))
+              moment_date.weekday() === 6 ||
+              moment_date.isBefore(
+                moment_tz().tz("Asia/Manila").add({ days: 1 })
+              )
             );
           }}
         />

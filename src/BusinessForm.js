@@ -6,6 +6,7 @@ import * as yup from "yup";
 import { useEffect } from "react";
 import { SingleDatePicker } from "react-dates";
 import moment from "moment";
+import moment_tz from "moment-timezone";
 import classnames from "classnames";
 import ReCAPTCHA from "react-google-recaptcha";
 
@@ -536,7 +537,9 @@ export default function BusinessForm() {
         <Form.Label>Appointment Date</Form.Label> <br />
         <SingleDatePicker
           date={
-            values.appointment_date ? moment(values.appointment_date) : null
+            values.appointment_date
+              ? moment_tz(values.appointment_date).tz("Asia/Manila")
+              : null
           } // momentPropTypes.momentObj or null
           onDateChange={(date) => setFieldValue("appointment_date", date)} // PropTypes.func.isRequired
           focused={values.appointment_date_focused} // PropTypes.bool
@@ -544,7 +547,7 @@ export default function BusinessForm() {
             setFieldValue("appointment_date_focused", focused)
           } // PropTypes.func.isRequired
           id="appointment-date" // PropTypes.string.isRequired,
-          minDate={moment().add({ days: 2 })}
+          minDate={moment_tz().tz("Asia/Manila").add({ days: 2 })}
           isDayBlocked={(moment_date) => {
             const has_same =
               unavailable_dates.filter((o) => {
@@ -554,7 +557,10 @@ export default function BusinessForm() {
             return (
               has_same ||
               moment_date.weekday() === 0 ||
-              moment_date.isBefore(moment().add({ days: 1 }))
+              moment_date.weekday() === 6 ||
+              moment_date.isBefore(
+                moment_tz().tz("Asia/Manila").add({ days: 1 })
+              )
             );
           }}
         />
