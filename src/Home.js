@@ -21,12 +21,12 @@ export default function Home({ history }) {
       >
         <Link to="/business">
           <Button variant="primary" size="lg">
-            New Business
+            NEW
           </Button>
         </Link>
         <Link to="/renewal">
           <Button variant="primary" size="lg" style={{ marginLeft: "1rem" }}>
-            Business Renewal
+            RENEWAL
           </Button>
         </Link>
       </div>
