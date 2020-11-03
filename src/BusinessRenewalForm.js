@@ -307,7 +307,8 @@ export default function BusinessRenewalForm() {
               moment_date.weekday() === 6 ||
               moment_date.isBefore(
                 moment_tz().tz("Asia/Manila").add({ days: 1 })
-              )
+              ) ||
+              moment_date.isAfter(moment_tz("2021-02-28").tz("Asia/Manila"))
             );
           }}
         />
