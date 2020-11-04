@@ -507,7 +507,7 @@ export default function BusinessForm() {
           onChange={handleChange}
           isInvalid={!!errors.type_of_property}
         >
-          <option value="">Select Type of Lease</option>
+          <option value="">Select Type of Property</option>
           <option>Owned</option>
           <option>Rented</option>
         </Form.Control>
