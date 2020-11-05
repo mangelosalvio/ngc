@@ -547,7 +547,6 @@ export default function BusinessForm() {
             setFieldValue("appointment_date_focused", focused)
           } // PropTypes.func.isRequired
           id="appointment-date" // PropTypes.string.isRequired,
-          minDate={moment_tz().tz("Asia/Manila").add({ days: 2 })}
           isDayBlocked={(moment_date) => {
             const has_same =
               unavailable_dates.filter((o) => {
@@ -561,6 +560,7 @@ export default function BusinessForm() {
               moment_date.isBefore(
                 moment_tz().tz("Asia/Manila").add({ days: 1 })
               ) ||
+              moment_date.isBefore(moment_tz("2021-01-01").tz("Asia/Manila")) ||
               moment_date.isAfter(moment_tz("2021-02-28").tz("Asia/Manila"))
             );
           }}
